@@ -1,0 +1,32 @@
+definitions:
+  users.IndexResponse:
+    properties:
+      email:
+        example: usera2tt@gmail.com
+        type: string
+    type: object
+host: bridge.together-coding.com
+info:
+  contact:
+    email: usera2tt@gmail.com
+    name: a2tt
+    url: https://a2tt.me
+  description: Runtime-Related Managing Service
+  title: Runtime Bridge
+paths:
+  /:
+    get:
+      consumes:
+      - application/json
+      description: index page
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.IndexResponse'
+      summary: index page
+      tags:
+      - users
+swagger: "2.0"

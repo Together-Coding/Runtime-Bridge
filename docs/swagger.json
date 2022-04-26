@@ -1,0 +1,49 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Runtime-Related Managing Service",
+        "title": "Runtime Bridge",
+        "contact": {
+            "name": "a2tt",
+            "url": "https://a2tt.me",
+            "email": "usera2tt@gmail.com"
+        }
+    },
+    "host": "bridge.together-coding.com",
+    "paths": {
+        "/": {
+            "get": {
+                "description": "index page",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "index page",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/users.IndexResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "users.IndexResponse": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "usera2tt@gmail.com"
+                }
+            }
+        }
+    }
+}
