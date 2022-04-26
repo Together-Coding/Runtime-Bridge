@@ -1,7 +1,7 @@
 package runtimes
 
 import (
-	"github.com/together-coding/runtime-bridge/containers"
+	"github.com/together-coding/runtime-bridge/db"
 	"time"
 )
 
@@ -13,8 +13,6 @@ type RuntimeImage struct {
 	Revision     string    `json:"revision" gorm:"not null"`      // Revision number of Task Definition
 	Available    bool      `json:"available" gorm:"not null;default:0"`
 	CreatedAt    time.Time `json:"created_at" gorm:"not null"`
-
-	RuntimeAllocations []containers.RuntimeAllocation `gorm:"constraint:OnDelete:CASCADE"`
 }
 
 type SupportedLanguage struct {

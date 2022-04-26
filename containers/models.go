@@ -1,6 +1,10 @@
 package containers
 
-import "time"
+import (
+	"github.com/together-coding/runtime-bridge/runtimes"
+	"github.com/together-coding/runtime-bridge/users"
+	"time"
+)
 
 type RuntimeAllocation struct {
 	ID     int64  `json:"id" gorm:"primaryKey"`
@@ -25,4 +29,8 @@ type RuntimeAllocation struct {
 
 	CreatedAt time.Time `json:"created_at" gorm:"not null"`
 	UpdatedAt time.Time `json:"updated_at" gorm:"not null"`
+
+	// Foreign key
+	User         users.User            `gorm:"foreignKey:UserId;constraint:OnDelete:CASCADE;"`
+	RuntimeImage runtimes.RuntimeImage `gorm:"foreignKey:RuntimeImageID;constraint:OnDelete:CASCADE;"`
 }

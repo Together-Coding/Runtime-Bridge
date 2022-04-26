@@ -1,7 +1,6 @@
 package users
 
 import (
-	"github.com/together-coding/runtime-bridge/containers"
 	"time"
 )
 
@@ -14,6 +13,4 @@ type User struct {
 	Name       string    `json:"-" gorm:"not null"`
 	FromSocial bool      `json:"-" gorm:"not null"`
 	CreatedAt  time.Time `json:"-" gorm:"not null"`
-
-	RuntimeAllocations []containers.RuntimeAllocation `gorm:"constraint:OnDelete:CASCADE"`
 }
