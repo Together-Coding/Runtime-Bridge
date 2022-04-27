@@ -31,6 +31,6 @@ type RuntimeAllocation struct {
 	UpdatedAt time.Time `json:"updated_at" gorm:"not null"`
 
 	// Foreign key
-	User         users.User            `gorm:"foreignKey:UserId;constraint:OnDelete:CASCADE;"`
+	User         users.User            `gorm:"foreignKey:UserID;constraint:OnDelete:CASCADE;"`
 	RuntimeImage runtimes.RuntimeImage `gorm:"foreignKey:RuntimeImageID;constraint:OnDelete:CASCADE;"`
 }
