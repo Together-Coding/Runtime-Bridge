@@ -1,5 +1,8 @@
 # runtime-bridge
 
+# API document
+- https://deb-bridge.together-coding.com/swagger/index.html
+
 # Requirements
 
 > To be updated
@@ -9,6 +12,11 @@
     `$ gin --port 8080 run main.go --all`
 - Update swagger
     `$ swag init`
+
+# Deploy
+1. `$ GOOS=linux GOARCH=amd64 go build -o app .`
+2. Move created executable to a server
+3. `$ PORT=8080 GIN_MODE=release /path/to/exec/app`
 
 # DB Migration - [golang-migrate CLI](https://github.com/golang-migrate/migrate/tree/master/cmd/migrate#with-go-toolchain)
 
