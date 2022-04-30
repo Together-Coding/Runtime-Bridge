@@ -4,6 +4,12 @@
 
 > To be updated
 
+# Development
+- Start server
+    `$ gin --port 8080 run main.go --all`
+- Update swagger
+    `$ swag init`
+
 # DB Migration - [golang-migrate CLI](https://github.com/golang-migrate/migrate/tree/master/cmd/migrate#with-go-toolchain)
 
 1. Install golang-migrate CLI

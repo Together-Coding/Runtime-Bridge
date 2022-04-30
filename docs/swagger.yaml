@@ -1,32 +1,140 @@
 definitions:
-  users.IndexResponse:
+  containers.LaunchResp:
     properties:
-      email:
-        example: usera2tt@gmail.com
+      port:
+        example: 8000
+        type: integer
+      url:
+        example: 127.0.0.1
         type: string
     type: object
-host: bridge.together-coding.com
+  containers.MyContResp:
+    properties:
+      cont_auth:
+        type: string
+      cont_auth_type:
+        type: string
+      cont_ip:
+        type: string
+      cont_port:
+        type: integer
+      cont_user:
+        type: string
+    type: object
+  runtimes.RuntimeImage:
+    properties:
+      available:
+        type: boolean
+      id:
+        type: integer
+      language_name:
+        description: ForeignKey
+        type: string
+      name:
+        type: string
+    type: object
+  runtimes.SupportedLangResp:
+    properties:
+      language:
+        items:
+          $ref: '#/definitions/runtimes.SupportedLanguage'
+        type: array
+    type: object
+  runtimes.SupportedLanguage:
+    properties:
+      images:
+        items:
+          $ref: '#/definitions/runtimes.RuntimeImage'
+        type: array
+      name:
+        type: string
+      order:
+        type: integer
+    type: object
+  utils.CommonErrorResp:
+    properties:
+      error:
+        type: string
+    type: object
 info:
-  contact:
-    email: usera2tt@gmail.com
-    name: a2tt
-    url: https://a2tt.me
-  description: Runtime-Related Managing Service
-  title: Runtime Bridge
+  contact: {}
 paths:
-  /:
+  /containers/info:
     get:
       consumes:
       - application/json
-      description: index page
+      description: It returns the allocated container's data that is matched with
+        the API key. <br>Normally, only Runtime Agent servers call this endpoint.<br>
+        If `X-API-KEY` is missing, 400 error is returned.
+      parameters:
+      - description: API key assigned to each Agent server.
+        in: header
+        name: X-API-KEY
+        required: true
+        type: string
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/users.IndexResponse'
-      summary: index page
+            $ref: '#/definitions/containers.MyContResp'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/utils.CommonErrorResp'
+      summary: Return the containers' data matched with the API key
       tags:
-      - users
+      - containers
+  /containers/launch:
+    post:
+      consumes:
+      - application/json
+      description: This is called when the user tries to connect or to use runtime-related
+        functionalities. <br>This endpoint launches new Docker Container that will
+        be allocated for the user if not allocated yet, and then returns its information
+        in order for the user to access it.
+      parameters:
+      - description: target runtime name
+        example: C gcc11
+        in: body
+        name: name
+        required: true
+        schema:
+          type: string
+      - description: target language
+        example: C
+        in: body
+        name: lang
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/containers.LaunchResp'
+        "400":
+          description: '''`name` or `lang` is missing.'' | ''It is launching. Please
+            wait for a moment.'''
+          schema:
+            $ref: '#/definitions/utils.CommonErrorResp'
+      summary: Launch container if not assigned, and then return the assigned one.
+      tags:
+      - containers
+  /runtimes/available:
+    get:
+      description: Return supported languages available
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/runtimes.SupportedLangResp'
+      summary: Return supported languages available
+      tags:
+      - runtimes
 swagger: "2.0"
