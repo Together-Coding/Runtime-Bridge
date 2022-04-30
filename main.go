@@ -15,6 +15,12 @@ import (
 	"time"
 )
 
+func ping(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"ping": "pong",
+	})
+}
+
 func main() {
 	rand.Seed(time.Now().Unix())
 
@@ -29,6 +35,7 @@ func main() {
 
 	// Gin
 	r := gin.Default()
+	r.GET("/", ping)
 	utils.CORSMiddleware(r)
 
 	// users
