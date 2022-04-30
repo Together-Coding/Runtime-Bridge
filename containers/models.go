@@ -6,6 +6,15 @@ import (
 	"time"
 )
 
+type ContHealth int8
+
+const (
+	ContInactive    ContHealth = 0
+	ContLaunching   ContHealth = 1
+	ContActive      ContHealth = 2
+	ContTerminating ContHealth = 3
+)
+
 type RuntimeAllocation struct {
 	ID     int64  `json:"id" gorm:"primaryKey"`
 	UserID int64  `json:"user_id" gorm:"index;not null"` // Foreign key
@@ -14,7 +23,7 @@ type RuntimeAllocation struct {
 	RuntimeImageID int64     `json:"runtime_image_id" gorm:"not null"` // Foreign key
 	ContLaunchedAt time.Time `json:"cont_launched_at" gorm:""`
 	ContIp         string    `json:"cont_ip" gorm:""`
-	ContPort       uint16    `json:"cont_port" gorm:""`
+	ContPort       uint16    `json:"cont_port" gorm:""` // Agent server's port
 	ContUser       string    `json:"cont_user" gorm:""`
 	ContAuthType   string    `json:"cont_auth_type" gorm:""`             // password, host key, etc.
 	ContAuth       string    `json:"cont_auth" gorm:""`                  // authorization password. It is ok to store raw value of this?
@@ -33,4 +42,11 @@ type RuntimeAllocation struct {
 	// Foreign key
 	User         users.User            `gorm:"foreignKey:UserID;constraint:OnDelete:CASCADE;"`
 	RuntimeImage runtimes.RuntimeImage `gorm:"foreignKey:RuntimeImageID;constraint:OnDelete:CASCADE;"`
+}
+
+// isAvailable returns validity of the RuntimeAllocation.
+// It is valid when the container is in available states.
+// Otherwise, invalid.
+func (r *RuntimeAllocation) isAvailable() bool {
+	return r.Health == int8(ContActive)
 }
