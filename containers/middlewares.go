@@ -8,9 +8,9 @@ import (
 func VerifyApiKey() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// Check X-API-KEY to see whether it is from Runtime Agent
-		if true {
+		apiKey := c.Request.Header.Get("X-API-KEY")
+		if apiKey != "" {
 			// X-API-KEY is valid
-			apiKey := c.Request.Header.Get("X-API-KEY")
 			alloc := GetContainerFromKey(apiKey)
 			if alloc.isAvailable() {
 				c.Set("alloc", *alloc)
