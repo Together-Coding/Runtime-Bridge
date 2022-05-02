@@ -69,6 +69,13 @@ const docTemplate = `{
                 "summary": "Launch container if not assigned, and then return the assigned one.",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "User's Json Web Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "example": "C gcc11",
                         "description": "target runtime name",
                         "name": "name",

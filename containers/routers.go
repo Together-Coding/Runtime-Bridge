@@ -34,7 +34,7 @@ type LaunchResp struct {
 // @Description This is called when the user tries to connect or to use runtime-related functionalities. <br>This endpoint launches new Docker Container that will be allocated for the user if not allocated yet, and then returns its information in order for the user to access it.
 // @Tags containers
 // @Accept json
-// @param Authorization header string true "User's Json Web Token"
+// @param Authorization header string true "User's Json Web Token" example(Bearer ...)
 // @Param name body string true "target runtime name" example(C gcc11)
 // @Param lang body string true "target language" example(C)
 // @Produce json
