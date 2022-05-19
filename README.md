@@ -1,7 +1,7 @@
 # runtime-bridge
 
 # API document
-- https://deb-bridge.together-coding.com/swagger/index.html
+- https://dev-bridge.together-coding.com/swagger/index.html
 
 # Requirements
 

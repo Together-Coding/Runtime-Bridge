@@ -69,6 +69,14 @@ const docTemplate = `{
                 "summary": "Launch container if not assigned, and then return the assigned one.",
                 "parameters": [
                     {
+                        "type": "string",
+                        "example": "Bearer ...",
+                        "description": "User's Json Web Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "example": "C gcc11",
                         "description": "target runtime name",
                         "name": "name",
@@ -181,6 +189,12 @@ const docTemplate = `{
         "runtimes.SupportedLangResp": {
             "type": "object",
             "properties": {
+                "image": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/runtimes.RuntimeImage"
+                    }
+                },
                 "language": {
                     "type": "array",
                     "items": {
@@ -192,12 +206,6 @@ const docTemplate = `{
         "runtimes.SupportedLanguage": {
             "type": "object",
             "properties": {
-                "images": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/runtimes.RuntimeImage"
-                    }
-                },
                 "name": {
                     "type": "string"
                 },

@@ -19,7 +19,7 @@ type SupportedLanguage struct {
 	Name  string `json:"name" gorm:"primaryKey"`
 	Order int8   `json:"order" gorm:"not null;default:0"`
 
-	RuntimeImages []RuntimeImage `json:"images" gorm:"constraint:OnDelete:CASCADE;foreignKey:LanguageName;references:Name"`
+	RuntimeImages []RuntimeImage `json:"-" gorm:"constraint:OnDelete:CASCADE;foreignKey:LanguageName;references:Name"`
 }
 
 func GetRuntimeImage(name, languageName string) RuntimeImage {
