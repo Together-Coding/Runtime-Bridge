@@ -35,6 +35,10 @@ definitions:
     type: object
   runtimes.SupportedLangResp:
     properties:
+      image:
+        items:
+          $ref: '#/definitions/runtimes.RuntimeImage'
+        type: array
       language:
         items:
           $ref: '#/definitions/runtimes.SupportedLanguage'
@@ -42,10 +46,6 @@ definitions:
     type: object
   runtimes.SupportedLanguage:
     properties:
-      images:
-        items:
-          $ref: '#/definitions/runtimes.RuntimeImage'
-        type: array
       name:
         type: string
       order:
@@ -96,6 +96,7 @@ paths:
         in order for the user to access it.
       parameters:
       - description: User's Json Web Token
+        example: Bearer ...
         in: header
         name: Authorization
         required: true
