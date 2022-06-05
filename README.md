@@ -1,7 +1,7 @@
 # runtime-bridge
 
 # API document
-- https://dev-bridge.together-coding.com/swagger/index.html
+- https://bridge.together-coding.com/swagger/index.html
 
 # Requirements
 
@@ -15,7 +15,9 @@
 
 # Deploy
 1. `$ GOOS=linux GOARCH=amd64 go build -o app .`
-2. Move created executable to a server
+2. Move created executable to a server.
+
+    For instance, use `scp`. `$ scp -i <key_path> ./app <username>@<ip_addr>:/home/ubuntu/app`
 3. `$ PORT=8080 GIN_MODE=release /path/to/exec/app`
 
 # DB Migration - [golang-migrate CLI](https://github.com/golang-migrate/migrate/tree/master/cmd/migrate#with-go-toolchain)
