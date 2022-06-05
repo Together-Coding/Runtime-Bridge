@@ -35,7 +35,7 @@ func main() {
 
 	// Gin
 	r := gin.Default()
-	r.GET("/", ping)
+	r.GET("/ping", ping)
 	utils.CORSMiddleware(r)
 
 	// users
