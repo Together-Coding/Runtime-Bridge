@@ -130,7 +130,7 @@ func LaunchContainer(c *gin.Context) {
 
 	// Ping the container until get response
 	agentPort := utils.GetConfigUint16("AGENT_PORT")
-	MustPingAgent(contIp, agentPort, 30)
+	MustPingAgent(contIp, agentPort, 300)
 
 	// Init the container
 	// Send API key that will be used for communication between bridge and agent servers
