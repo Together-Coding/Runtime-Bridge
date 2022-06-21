@@ -9,8 +9,8 @@ type RuntimeImage struct {
 	ID           int64     `json:"id" gorm:"primaryKey"`
 	Name         string    `json:"name" gorm:"not null"`
 	LanguageName string    `json:"language_name" gorm:"not null"` // ForeignKey
-	Taskdef      string    `json:"-" gorm:"not null"`       // AWS ECS Task Definition name
-	Revision     string    `json:"-" gorm:"not null"`      // Revision number of Task Definition
+	Taskdef      string    `json:"-" gorm:"not null"`             // AWS ECS Task Definition name
+	Revision     string    `json:"-" gorm:"not null"`             // Revision number of Task Definition
 	Available    bool      `json:"available" gorm:"not null;default:0"`
 	CreatedAt    time.Time `json:"-" gorm:"not null"`
 }
