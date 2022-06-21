@@ -20,8 +20,7 @@ func Register(router *gin.RouterGroup, mdwIdentifyUser utils.MiddlewareType) {
 }
 
 type LaunchReq struct {
-	Name string `json:"name"`
-	Lang string `json:"lang"`
+	RuntimeImageID int64 `json:"image_id"`
 }
 
 type LaunchResp struct {
@@ -58,7 +57,7 @@ func LaunchContainer(c *gin.Context) {
 	// TODO: support allocating multiple containers for a user (with upperbound limit),
 	//   but restrict to one per course.
 
-	runtimeImage := runtimes.GetRuntimeImage(body.Name, body.Lang)
+	runtimeImage := runtimes.GetRuntimeImage(body.RuntimeImageID)
 	alloc := RuntimeAllocation{}
 	db.DB.Where(&RuntimeAllocation{
 		UserID:         user.UserId,

@@ -22,8 +22,8 @@ type SupportedLanguage struct {
 	RuntimeImages []RuntimeImage `json:"-" gorm:"constraint:OnDelete:CASCADE;foreignKey:LanguageName;references:Name"`
 }
 
-func GetRuntimeImage(name, languageName string) RuntimeImage {
-	ri := RuntimeImage{Name: name, LanguageName: languageName}
+func GetRuntimeImage(id int64) RuntimeImage {
+	ri := RuntimeImage{ID: id}
 	db.DB.Where(&ri).Find(&ri)
 	return ri
 }
