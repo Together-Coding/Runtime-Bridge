@@ -1,8 +1,11 @@
 # Runtime-Bridge
 
+
 **Runtime-Bridge** manages the allocations of containers used to execute codes remotely from [web IDE](https://github.com/Together-Coding/Client). It launches an [AWS Fargate](https://aws.amazon.com/fargate/) container for each user on request, and returns its public IP address and port number through which the user can access the container.
 
 This server also provides reverse proxy using NGINX to allow the users to access the container using HTTPs connection.
+
+![architecture](./docs/architecture.png)
 
 
 
