@@ -46,7 +46,7 @@ func LaunchContainer(c *gin.Context) {
 	err := c.BindJSON(&body)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, utils.CommonErrorResp{
-			Msg: "`name` or `lang` is missing.",
+			Msg: "`image_id` is required.",
 		})
 		return
 	}
@@ -68,7 +68,6 @@ func LaunchContainer(c *gin.Context) {
 		RuntimeImageID: runtimeImage.ID,
 		Health:         int8(ContLaunching),
 	}).Find(&alloc)
-	fmt.Println(alloc.ID, alloc.UserID, alloc.RuntimeImageID, alloc.Health, alloc.CreatedAt)
 
 	if alloc.Health == int8(ContActive) {
 		// Return from already allocated
